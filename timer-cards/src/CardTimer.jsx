@@ -1,5 +1,12 @@
 import React from "react";
 import { formatMMSS } from "./utils/functions";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 
 const MemoizedCardTimer = React.memo(function CardTimer({
   id,
@@ -11,34 +18,29 @@ const MemoizedCardTimer = React.memo(function CardTimer({
   onStop,
 }) {
   return (
-    <div className="rounded-xl border p-4 shadow-sm flex items-center justify-between gap-4">
-      <div>
-        <div className="text-sm text-gray-500">{label}</div>
-        <div className="text-2xl font-semibold tabular-nums">
-          {formatMMSS(currentSeconds)}
-        </div>
-        <div className="text-xs text-gray-400 mt-1">tick: ~{intervalMs} ms</div>
-      </div>
-      <div className="flex items-center gap-2">
-        {!isRunning ? (
-          <button
-            onClick={() => onStart(id)}
-            className="px-3 py-1.5 rounded-lg border hover:bg-gray-50"
-            aria-label={`Start ${label}`}
-          >
-            Start Me
-          </button>
-        ) : (
-          <button
-            onClick={() => onStop(id)}
-            className="px-3 py-1.5 rounded-lg border hover:bg-gray-50"
-            aria-label={`Stop ${label}`}
-          >
-            Stop Me
-          </button>
-        )}
-      </div>
-    </div>
+    <Box>
+      <Card variant="outlined" sx={{ minWidth: 200, mb: 2, p: 2}}>
+        <Stack>
+          <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
+            {label}
+          </Typography>
+          <Box>
+            <Typography variant="h5" component="div">{formatMMSS(currentSeconds)}</Typography>
+            {!isRunning ? (
+              <Button onClick={() => onStart(id)} aria-label={`Start ${label}`}>
+                Start Me
+              </Button>
+            ) : (
+              <Button onClick={() => onStop(id)} aria-label={`Stop ${label}`}>
+                Stop Me
+              </Button>
+            )}
+          </Box>
+
+          <div>Random tick: {intervalMs} ms</div>
+        </Stack>
+      </Card>
+    </Box>
   );
 });
 

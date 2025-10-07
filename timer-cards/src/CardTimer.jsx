@@ -17,19 +17,39 @@ const MemoizedCardTimer = React.memo(function CardTimer({
 }) {
   return (
     <Box>
-      <Card variant="outlined" sx={{ minWidth: 200, mb: 2, p: 2}}>
-        <Stack >
-          <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
+      <Card variant="outlined" sx={{ minWidth: 200, mb: 2, p: 2 }}>
+        <Stack>
+          <Typography
+            gutterBottom
+            sx={{ color: "text.secondary", fontSize: 14 }}
+          >
             {label}
           </Typography>
-          <Box display={"flex"} alignItems={"center"} spacing={2} justifyContent={"space-between"} mb={1}>
-            <Typography variant="h5" component="div">{formatMMSS(currentSeconds)}</Typography>
+          <Box
+            display={"flex"}
+            alignItems={"center"}
+            spacing={2}
+            justifyContent={"space-between"}
+            mb={1}
+          >
+            <Typography variant="h5" component="div">
+              {formatMMSS(currentSeconds)}
+            </Typography>
             {!isRunning ? (
-              <Button onClick={() => onStart(id)} aria-label={`Start ${label}`}>
+              <Button
+                variant="outlined"
+                onClick={() => onStart(id)}
+                aria-label={`Start ${label}`}
+              >
                 Start Me
               </Button>
             ) : (
-              <Button onClick={() => onStop(id)} aria-label={`Stop ${label}`}>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => onStop(id)}
+                aria-label={`Stop ${label}`}
+              >
                 Stop Me
               </Button>
             )}
